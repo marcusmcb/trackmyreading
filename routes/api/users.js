@@ -13,7 +13,8 @@ const User = require('../../models/User')
 
 // @route POST api/users/register
 // @desc Register user
-// @access Public
+// @access PUBLIC
+
 router.post('/register', (req, res) => {
   // Form validation
   const { errors, isValid } = validateRegisterInput(req.body)
@@ -45,9 +46,20 @@ router.post('/register', (req, res) => {
   })
 })
 
+// @route GET api/users
+// @desc fetch all users from DB
+// @access PUBLIC
+
+router.get('/', (req, res) => {
+  User.find()
+      .then(users => res.json(users))
+      .catch(err => console.log(err))
+})
+
 // @route POST api/users/login
 // @desc Login user and return JWT token
-// @access Public
+// @access PUBLIC
+
 router.post('/login', (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body)
